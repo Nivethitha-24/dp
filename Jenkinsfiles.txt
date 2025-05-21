@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git credentialsId: 'github-token', url: 'https://github.com/Nivethitha-24/DEVOPS_PROJ.git', branch: 'main'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'No build step required for static HTML.'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Make sure the user running Jenkins has sudo permissions (without password) for this command
+                    sh 'sudo cp -r index.html /var/www/html/'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment completed successfully.'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+}
