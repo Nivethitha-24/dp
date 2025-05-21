@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git credentialsId: 'github-token', url: 'https://github.com/Nivethitha-24/DEVOPS_PROJ.git', branch: 'main'
+                git credentialsId: 'github-token', url: 'https://github.com/Nivethitha-24/dp.git', branch: 'main'
             }
         }
 
@@ -17,8 +17,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Make sure the user running Jenkins has sudo permissions (without password) for this command
-                    sh 'sudo cp -r index.html /var/www/html/'
+                    // Ensure the user running Jenkins has sudo permissions (without password) for this command
+                    sh 'sudo cp -r * /var/www/html/'
                 }
             }
         }
